@@ -1,9 +1,11 @@
-import { Button, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import { Image } from 'expo-image';
+import { Link } from "expo-router";
+import {SafeAreaView, Text, View } from "react-native";
 export default function Index() {
   return (
-   <View>
-    <Text className="text-red-500">Hello Ji</Text>
-   </View>
+    <View className="flex-1 items-center justify-center">
+    <Text className="text-red-500 text-8xl font-bold">Hello Ji</Text>
+    <Link href="/(auth)/signup">Signup</Link>
+    <Link href="/(auth)">Signin</Link>
+  </View>
   );
 }
