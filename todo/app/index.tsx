@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-
+import { Image } from 'expo-image';
 export default function Index() {
   return (
     <View
@@ -9,7 +9,12 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      {/* <Text>Hello Ji</Text> */}
+      <Image 
+      source="https://images.unsplash.com/photo-1746307415334-8914cae06a28?q=80&w=1984&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      style={{width: 200, height: 200}}
+       contentFit="cover"
+      />
     </View>
   );
 }
