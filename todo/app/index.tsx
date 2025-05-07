@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Button, Text, TouchableOpacity, View } from "react-native";
 import { Image } from 'expo-image';
 export default function Index() {
   return (
@@ -15,6 +15,19 @@ export default function Index() {
       style={{width: 200, height: 200}}
        contentFit="cover"
       />
+{/* It is normal button with minimal functionality */}
+      <Button title="Click me" onPress={()=>{
+        alert("Button clicked")
+      }}></Button>
+
+      {/* TouchableOpacity - TouchableOpacity is a component that allows you to create a button that can be pressed. */}
+      <TouchableOpacity style={{backgroundColor: "red", padding: 10, borderRadius: 5}} onPress={()=>{
+        alert("Button clicked2")
+      }}>
+        <Text>Touch me</Text>
+      </TouchableOpacity>
+
+      
     </View>
   );
 }
