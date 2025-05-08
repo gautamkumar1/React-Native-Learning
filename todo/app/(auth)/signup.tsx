@@ -2,8 +2,10 @@ import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform
 import React, { useState } from 'react'
 import Logo from '@/components/Logo';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 export default function Signup() {
+  const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -88,7 +90,7 @@ export default function Signup() {
                 
                 <View className="flex-row justify-center mt-8">
                     <Text className="text-gray-400">Already have an account? </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => router.push('/')}>
                         <Text className="text-blue-400 font-medium">Sign In</Text>
                     </TouchableOpacity>
                 </View>
