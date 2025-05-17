@@ -4,8 +4,16 @@ import express from 'express';
 import { connectDB } from './utils/db.js';
 import userRoutes from './routes/user-route.js';
 import todoRoutes from './routes/todo-routes.js';
+import cors from 'cors';
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(cors({
+    origin: 'http://localhost:8081',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 app.get('/', (req, res) => {
     res.send('Your Express server is up and running!');

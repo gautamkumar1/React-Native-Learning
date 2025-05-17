@@ -31,6 +31,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     try {
         const response = await fetch("http://localhost:3000/api/v1/register", {
             method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
             body: JSON.stringify({ email, password }),
         });
         if(response.ok){
@@ -60,6 +63,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     try {
       const response = await fetch("http://localhost:3000/api/v1/login", {
         method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ email, password }),
       });
       if(response.ok){

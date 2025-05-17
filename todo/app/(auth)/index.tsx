@@ -3,20 +3,19 @@ import React, { useState } from 'react'
 import Logo from '@/components/Logo';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useAuthStore } from '@/store/authStore';
 
 export default function Signin() {
   const router = useRouter();
+  const { login, isLoginLoading } = useAuthStore();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
     const handleSignIn = () => {
-        setIsLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
+        login(email, password);
+        router.push('/');
+        
     };
     
     return (
@@ -75,11 +74,11 @@ export default function Signin() {
 
                     <View>
                         <TouchableOpacity 
-                            className={`bg-blue-500 py-4 rounded-xl items-center mt-4 ${isLoading ? 'opacity-70' : ''}`}
+                            className={`bg-blue-500 py-4 rounded-xl items-center mt-4 ${isLoginLoading ? 'opacity-70' : ''}`}
                             onPress={handleSignIn}
-                            disabled={isLoading}
+                            disabled={isLoginLoading}
                         >
-                            {isLoading ? (
+                            {isLoginLoading ? (
                                 <Text className="text-white font-bold">Signing in...</Text>
                             ) : (
                                 <Text className="text-white font-bold">Sign In</Text>
