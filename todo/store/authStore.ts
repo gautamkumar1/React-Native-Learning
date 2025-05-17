@@ -2,6 +2,7 @@ import { User } from "@/types/User";
 import { create } from "zustand";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from "react-native-toast-message";
+import { Alert } from "react-native";
 interface AuthStore {
   user: User | null;
   isAuthenticated: () => boolean;
@@ -57,7 +58,16 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       set({ isRegisterLoading: false });
     }
   },
-  logout: () => set({ user: null, token: null }),
+  logout: async () => {
+    try {
+      await AsyncStorage.removeItem("token");
+      await AsyncStorage.removeItem("user");
+      set({ token: null, user: null });
+      Alert.alert("Logged out successfully");
+    } catch (error) {
+      console.error(error, "Error logging out");
+    }
+  },
   login: async (email, password) => {
     set({ isLoginLoading: true });
     try {
@@ -90,7 +100,16 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       set({ isLoginLoading: false });
     }
   },
-  
+  checkAuth: async () => {
+    try {
+      const token = await AsyncStorage.getItem("token");
+      if(token){
+        set({ token: token });
+      }
+    } catch (error) {
+      console.error(error, "Error in checking auth");
+    }
+  }
   
 }));
 

@@ -1,5 +1,5 @@
 import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '@/components/Logo';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -7,7 +7,7 @@ import { useAuthStore } from '@/store/authStore';
 
 export default function Signin() {
   const router = useRouter();
-  const { login, isLoginLoading } = useAuthStore();
+  const { login, isLoginLoading,token,isAuthenticated,checkAuth } = useAuthStore();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -17,7 +17,11 @@ export default function Signin() {
         router.push('/');
         
     };
-    
+    console.log(token,"token");
+    console.log(isAuthenticated(),"isAuthenticated");
+    useEffect(() => {
+        checkAuth();
+    }, []);
     return (
         <KeyboardAvoidingView 
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
